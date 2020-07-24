@@ -54,6 +54,7 @@ export default function From() {
 
   const handleChange = (e) => {
     const value =
+      // eslint-disable-next-line
       e.target.type == "checkbox" ? e.target.checked : e.target.value;
     setFormState({ ...formState, [e.target.name]: value });
     console.log("formState: ", formState);
@@ -73,6 +74,7 @@ export default function From() {
           Name:
           <br />
           <input
+            data-cy="name"
             type="text"
             name="name"
             value={formState.name}
@@ -107,6 +109,7 @@ export default function From() {
             <label htmlFor="pepperoni">
               Pepperoni
               <input
+                data-cy="pepperoni"
                 type="checkbox"
                 name="pepperoni"
                 onChange={handleChange}
@@ -117,6 +120,7 @@ export default function From() {
             <label htmlFor="pineapple">
               Pineapple
               <input
+                data-cy="pineapple"
                 type="checkbox"
                 name="pineapple"
                 onChange={handleChange}
@@ -128,6 +132,7 @@ export default function From() {
             <label htmlFor="mushroom">
               Mushroom
               <input
+                data-cy="mushroom"
                 type="checkbox"
                 name="mushroom"
                 onChange={handleChange}
@@ -138,6 +143,7 @@ export default function From() {
             <label htmlFor="extraCheese">
               Extra Cheese
               <input
+                data-cy="extraCheese"
                 type="checkbox"
                 name="extraCheese"
                 onChange={handleChange}
@@ -160,7 +166,7 @@ export default function From() {
           </div>
         </label>
         <br />
-        <button>+Add to Order</button>
+        <button data-cy="addOrderButton">+Add to Order</button>
       </form>
       <pre>{JSON.stringify(post, null, 2)}</pre>
     </div>
