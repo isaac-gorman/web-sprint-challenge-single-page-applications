@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as yup from "yup";
+import axios from "axios";
 
 export default function From() {
   const defaultValues = {
@@ -14,6 +15,19 @@ export default function From() {
 
   const [formState, setFormState] = useState(defaultValues);
   const [errors, setErrors] = useState({ ...defaultValues });
+  const [post, setPost] = useState([]);
+
+  const submitInput = (input) => {
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then((res) => {
+        setPost(res.data);
+        console.log("success!", res.data);
+      })
+      .catch((error) => {
+        console.log("Error detected: ", error.response);
+      });
+  };
 
   const formSchema = yup.object().shape({
     name: yup.string().min(2, "Please provide a name").required(),
@@ -48,6 +62,7 @@ export default function From() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    submitInput(formState);
   };
 
   return (
@@ -147,6 +162,7 @@ export default function From() {
         <br />
         <button>+Add to Order</button>
       </form>
+      <pre>{JSON.stringify(post, null, 2)}</pre>
     </div>
   );
 }
